@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function($rootScope, $scope, spUtil) {
+
+	//Initialize Vars
+  var c = this;
+	userFormInteraction = false;
+	
+	//Run on first load
+	processLocation(nhpLocationId);
+	
+	//--------------------------
+	//Processing for the back button
+		c.back = function() {   
+			
+			if($rootScope.computerNeeded == 'no'){
+					processLocation(1);
+				
+			}else if($rootScope.reimage == 'yes' && nhpLocationId == 2){	
+				processLocation(1);
+				
+			}else if($rootScope.reimage == 'yes'){	
+				processLocation(2);
+				
+			}else{
+					processLocation(nhpLocationId-1);
+			}					
+   }; 
+	
+	
+	//--------------------------
+	//Set up global listener		
+	$rootScope.$on('changeLocation', function (event, id) {
+		processLocation(parseInt(id, 10));	
+	});
+	
+	//--------------------------
+	//Processing for the next button
+		c.next = function() {   
+			
+			if(!$rootScope.userFormInteraction){//has the user answered the question at hand?
+				$scope.message = '** Please answer the given question(s)';
+				
+			}	else if($rootScope.computerNeeded == 'no' && nhpLocationId == 1){
+				processLocation(6);
+				
+			}	else if($rootScope.reimage == 'yes' && nhpLocationId == 2){							
+				processLocation(6);
+				
+			}else if($rootScope.reimage == 'no' && nhpLocationId == 2){							
+				processLocation(3);
+				
+			}else{				
+				processLocation(nhpLocationId+1);
+			}
+			
+			//Reset form status		
+			$rootScope.userFormInteraction = false;
+   }; 
+	
+	
+	//-------------------------------
+	//Function to handle navigation duties
+	function processLocation(loc){
+		
+			switch(loc){
+				case 1://Ask if hire needs a computer
+					$scope.message = '';
+					$scope.disableBack = true;
+					$scope.disableNext = false;		
+					$rootScope.$emit('updateWidget', 'ks-nhp-01-is-computer-needed');				
+				  break;
+					
+				case 2://Option to skip ahead to re-image
+					$scope.disableBack = false;
+					$scope.disableNext = false;
+					$rootScope.$emit('updateWidget', 'ks_nhp_02_skip_to_reimage_option');
+					break;
+
+				case 3://Branch to either Apple or Dell
+					$scope.disableBack = false;
+					$scope.disableNext = false;
+					$rootScope.$emit('updateWidget', 'ks-nhp-03-job-type');
+					break;
+
+				case 4://Let manager choose specific hardware product
+					$scope.disableBack = false;
+					$scope.disableNext = false;
+					$rootScope.$emit('updateWidget', 'ks_nhp_04_choose_hardware');		
+					break;
+					
+			case 5://confirm hardware selection and submit
+					$scope.disableBack = false;
+					$scope.disableNext = true;
+					$rootScope.$emit('updateWidget', 'ks_nhp_05_submit_hardware_selection');		
+					break;
+
+			 case 6://Pass off to SP for remaining requests
+					if($rootScope.hardwareSelection != ''){
+					  $scope.disableBack = true;
+					}else{
+						$scope.disableBack = false;
+					}
+					$scope.disableNext = true;
+					$rootScope.$emit('updateWidget', 'ks-nhp-08-sp-jump');		
+					break;
+					
+			default:
+
+		}
+		
+		nhpLocationId = loc;
+		$scope.message = '';
+	}
+	
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.navRow{
+ font-weight:bold;
+ margin: auto;
+ margin-top:15px;
+ margin-bottom:15px;
+ font-size:15px;
+ text-align: center;
+}
+
+.disabled{ 
+  color:#cccccc;
+}
+
+.error{
+  color:red;
+  font-weight:600;
+  font-size: 14px;  
+  font-style: italic;
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>ks_nhp_navigation</id>
+        <internal>false</internal>
+        <link/>
+        <name>KS NHP Navigation</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {  /* populate the 'data' object */  /* e.g., data.table = $sp.getValue('table'); */})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>dapichar@ksbe.edu</sys_created_by>
+        <sys_created_on>2018-09-19 20:07:20</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_id>b884a01b0fece3001ceb590be1050e83</sys_id>
+        <sys_mod_count>146</sys_mod_count>
+        <sys_name>KS NHP Navigation</sys_name>
+        <sys_package display_value="KS New Hire Provisioning" source="x_kasc_ks_new_hire">ccac0fcd13bb5b00c28350782244b0e8</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="KS New Hire Provisioning">ccac0fcd13bb5b00c28350782244b0e8</sys_scope>
+        <sys_update_name>sp_widget_b884a01b0fece3001ceb590be1050e83</sys_update_name>
+        <sys_updated_by>dapichar@ksbe.edu</sys_updated_by>
+        <sys_updated_on>2019-01-09 23:17:04</sys_updated_on>
+        <template><![CDATA[<div class='navRow'>
+    <div style="margin-top:15px;" class="error">{{message}}&nbsp;</div>
+  <button 
+          ng-model="back" 
+          ng-disabled="disableBack"
+          id='back' 
+          style='margin-right:25px;' 
+          type="button" 
+          ng-class="{'disabled': disableBack}" 
+          ng-click="c.back()">&larr; Back</button>
+  <button 
+          ng-model="next" 
+          ng-disabled="disableNext"
+          id='next' 
+          style='margin-left:25px;' 
+          type="button" 
+          ng-class="{'disabled': disableNext}" 
+          ng-click="c.next()">Next &rarr;</button> 
+</div>]]></template>
+    </sp_widget>
+</record_update>

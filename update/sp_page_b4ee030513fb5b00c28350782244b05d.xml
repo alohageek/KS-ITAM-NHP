@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_page">
+    <sp_page action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <css>.hire_input{
+  border: 1px solid #bdc0c4;
+  border-radius: 10px;  
+  padding-left:15px;
+}
+
+.read_only{
+ background-color: #e6e8ea; 
+}
+
+.questionHeader{
+  font-weight:600;
+  font-size:20px;
+  margin-top:15px;
+}
+
+.question{  
+  font-weight:500;
+  font-size:18px;
+  margin-top:15px;
+  color:#990000;
+}
+
+.nonquestion{  
+  font-weight:500;
+  font-size:18px;
+  margin-top:15px;
+  color:#717171;
+}</css>
+        <draft>false</draft>
+        <dynamic_title_structure/>
+        <id>nhp</id>
+        <internal>false</internal>
+        <public>false</public>
+        <roles/>
+        <short_description>Landing page managers first see when provisioning a new hire.</short_description>
+        <sys_class_name>sp_page</sys_class_name>
+        <sys_created_by>dapichar@ksbe.edu</sys_created_by>
+        <sys_created_on>2018-08-07 01:58:17</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_id>b4ee030513fb5b00c28350782244b05d</sys_id>
+        <sys_mod_count>35</sys_mod_count>
+        <sys_name>nhp</sys_name>
+        <sys_package display_value="KS New Hire Provisioning" source="x_kasc_ks_new_hire">ccac0fcd13bb5b00c28350782244b0e8</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="KS New Hire Provisioning">ccac0fcd13bb5b00c28350782244b0e8</sys_scope>
+        <sys_update_name>sp_page_b4ee030513fb5b00c28350782244b05d</sys_update_name>
+        <sys_updated_by>dapichar@ksbe.edu</sys_updated_by>
+        <sys_updated_on>2018-10-23 19:09:13</sys_updated_on>
+        <title>New Hire Provisioning</title>
+    </sp_page>
+</record_update>

@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function($scope,$rootScope) {
+  /* widget controller */
+  var c = this;
+	selected = false;
+	
+	c.server.get({
+		action: "getHardwareModels",
+		allowAppleSelection: $rootScope.allowAppleSelection
+	}).then(function(response) {
+		$scope.data.items = response.data.items;
+	});
+	
+	c.selectItem=function(id){
+		$rootScope.hardwareSelection = id;
+		var title = document.getElementById(id+'title');
+    title.setAttribute("class","selectedHardware");
+		
+		var button = document.getElementById(id+'button');
+    button.setAttribute("class","selectedButton");
+		button.setAttribute("value","Selected!");
+		
+		toggleStyle(id);
+		
+		$rootScope.userFormInteraction = true;
+	}
+	
+	//reset all other styles
+	function toggleStyle(id){
+		for (i = 0; i < $scope.data.items.length; i++) {
+			if(id != $scope.data.items[i].sys_id){
+				var clearTitle = document.getElementById($scope.data.items[i].sys_id+'title');
+				clearTitle.setAttribute("class","");
+		
+				var clearButton = document.getElementById($scope.data.items[i].sys_id+'button');
+				clearButton.setAttribute("class","");
+				clearButton.setAttribute("value","Select");
+			}      
+		}
+	}
+	
+}	//question]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.selectedHardware{
+  color:#000000;
+  font-size:26px;
+  font-weight:600;
+  font-style: italic;
+  font-style: oblique;
+}
+
+.selectedButton{
+  color:#000000;
+  border:1px solid #4CFF33;
+  
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>ks_nhp_04_choose_hardware</id>
+        <internal>false</internal>
+        <link/>
+        <name>KS NHP 04 Choose Hardware</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+	
+	//Initialize vars
+	data.items = [];
+	
+	if (input && input.action == 'getHardwareModels'){
+
+		var gr = new GlideRecord('cmdb_hardware_product_model');
+		gr.addQuery('cmdb_model_category','94028b6a1b5310002502fbcd2c071315');
+		gr.addQuery('u_available_for_new_hires',true);
+		if(input.allowAppleSelection == 'yes'){
+			gr.addQuery('manufacturer','88b2a18e0a0a3c74017d60c057b2e787');//Apple products
+		}else{
+			gr.addQuery('manufacturer','2f2bc6a694b7b0005c021cad82565037');//Dell products
+		}
+
+		gr.query();
+
+		while(gr.next()){
+		 data.items.push({sys_id: ""+gr.sys_id, title: ""+gr.name, description: ""+gr.short_description, image: ""+gr.u_bundle_image.getDisplayValue()});
+		}	
+		
+	}
+
+})();
+
+
+		//data.staffTypes.push({value: types.value.toString(), label: types.label.toString()});
+]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>dapichar@ksbe.edu</sys_created_by>
+        <sys_created_on>2018-10-04 20:02:24</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_id>8f33b1480f8daf001ceb590be1050ee3</sys_id>
+        <sys_mod_count>214</sys_mod_count>
+        <sys_name>KS NHP 04 Choose Hardware</sys_name>
+        <sys_package display_value="KS New Hire Provisioning" source="x_kasc_ks_new_hire">ccac0fcd13bb5b00c28350782244b0e8</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="KS New Hire Provisioning">ccac0fcd13bb5b00c28350782244b0e8</sys_scope>
+        <sys_update_name>sp_widget_8f33b1480f8daf001ceb590be1050ee3</sys_update_name>
+        <sys_updated_by>dapichar@ksbe.edu</sys_updated_by>
+        <sys_updated_on>2019-01-09 20:33:04</sys_updated_on>
+        <template><![CDATA[<div>
+  <div>
+
+    <div>
+      <div class="question">
+        Which model would you like to choose for <span style="font-weight: 600;">{{$root.newHire}}</span>?
+      </div>
+      <div ng-if="data.items.length == 0">
+        No Items found!
+      </div>
+      <div id="{{::item.sys_id}}" ng-repeat="item in data.items"  style="border:1px solid #999999; margin-top:20px; padding-left:15px;" class="panel">
+        <h3 id="{{::item.sys_id}}title">
+          {{::item.title}}
+        </h3>
+        <div style="max-height: 3em; overflow: hidden; padding-top:1px;">{{::item.description}}</div>
+        <div class="kb-about" style="padding-top:4px;">
+          <span class="about-outer-span">
+            <span>
+              <img src="{{::item.image}}" />
+            </span>
+            <span style="margin-left:20px;display: inline-block; width: 50%; text-align: center;">
+              <input id="{{::item.sys_id}}button" style="font-size:16px;font-style:bold;padding-left:25px;padding-right:25px;" type="button" ng-click="c.selectItem(item.sys_id)" value="Select">
+            </span>
+          </span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+]]></template>
+    </sp_widget>
+</record_update>

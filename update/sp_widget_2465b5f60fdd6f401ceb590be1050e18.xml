@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function($scope,$rootScope) {
+  /* widget controller */
+  var c = this;
+	
+	if($rootScope.reimage == 'yes'){
+		$scope.reimage = true;
+	}else{
+		$scope.reimage = false;
+	}
+	
+	if($rootScope.hardwareSelection != ''){
+		c.server.get({
+			hardwareSubmitted: true,
+			selectedId: $rootScope.hardwareSelection,
+			newHireSysId: $rootScope.newHireSysId,
+			managerSysId: $rootScope.managerSysId,
+			newHire: $rootScope.newHire,
+			startDate: $rootScope.startDate
+		});
+	}
+	
+}	//question]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.selectedHardware{
+  color:#000000;
+  font-size:26px;
+  font-weight:600;
+  font-style: italic;
+  font-style: oblique;
+}
+
+.selectedButton{
+  color:#000000;
+  border:1px solid #4CFF33;
+  
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>ks-nhp-08-sp-jump</id>
+        <internal>false</internal>
+        <link/>
+        <name>KS NHP 08 SP Jump Off</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+	
+	//---------------------------------
+	if(input && input.hardwareSubmitted == true){ 
+		
+		//Set Vars
+		var gdt = new GlideDateTime();
+		gdt.addDaysLocalTime(2);
+		var dueDate = getFormattedDate(gdt, 1);
+		var newHireSysId = input.newHireSysId;
+    var managerSysId = input.managerSysId;		
+		var startDate = input.startDate;
+		var hardwareBundleId = input.selectedId;
+		
+		//Shopping cart request
+		//-----------------------------------
+   /* var cartId = gs.generateGUID();
+    var cart = new Cart(cartId);
+    var item = cart.addItem(hardwareBundleId);//Hardware Request
+    //cart.setVariable(item,'name',empSys_id);//
+    var rc = cart.placeOrder();	
+		*/
+
+		//var cart = new sn_sc.CartJS();
+      //cart.empty();
+		/*
+		var cart = new sn_sc.CartJS();
+		var item =
+		{
+		'sysparm_id': "'"+hardwareBundleId+"'",
+		'sysparm_quantity': '1',
+		'variables':{
+		'color': 'slate',
+		'storage': 'sixtyfour' 
+		}};
+		var cartDetails = cart.addToCart(item);
+		*/
+		//gs.addInfoMessage(cartDetails);
+		
+		
+		//Update termination request
+		//-----------------------------------
+		/*
+    var gr = new GlideRecord('sc_request');
+    gr.get(rc.sys_id);
+    gr.urgency = 1;
+    gr.stage = 'fulfillment';
+    gr.requested_for = newHireSysId;
+    gr.u_requested_by = managerSysId;
+    gr.opened_by = managerSysId;
+    gr.u_approving_manager = managerSysId;
+    gr.u_date_needed = ;
+    gr.due_date = dueDate;
+    gr.short_description = 'Programatic creation of a termination';
+    gr.special_instructions = 'Auto generated termination request from Human Resources Workday Application';
+    gr.update();
+		*/
+		
+		
+		
+		gs.addInfoMessage("Hardware request submitted! - " + newHireSysId + " - " + managerSysId+ " - " +startDate + " - " + hardwareBundleId + " - " + gdt);		
+		
+	}
+	//---------------------------------
+	
+		
+	
+
+//----------
+})();
+
+
+
+//############################################################
+function getFormattedDate(date, version) {
+//############################################################
+    var year = date.getYearLocalTime();
+    var month = (1 + date.getMonthLocalTime()).toString();
+    month = month.length > 1 ? month : '0' + month;
+    var day = date.getDayOfMonthUTC().toString();
+    day = day.length > 1 ? day : '0' + day;
+    var f_date = '';
+
+    switch(version) {
+        case 1:
+            f_date = month + '/' + day + '/' + year;
+            break;
+        case 2:
+            f_date = year + '-' + month + '-' + day;
+            break;
+        default:
+            f_date = month + '/' + day + '/' + year;
+    }
+
+    return f_date;
+}]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>dapichar@ksbe.edu</sys_created_by>
+        <sys_created_on>2018-10-25 19:30:47</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_id>2465b5f60fdd6f401ceb590be1050e18</sys_id>
+        <sys_mod_count>70</sys_mod_count>
+        <sys_name>KS NHP 08 SP Jump Off</sys_name>
+        <sys_package display_value="KS New Hire Provisioning" source="x_kasc_ks_new_hire">ccac0fcd13bb5b00c28350782244b0e8</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="KS New Hire Provisioning">ccac0fcd13bb5b00c28350782244b0e8</sys_scope>
+        <sys_update_name>sp_widget_2465b5f60fdd6f401ceb590be1050e18</sys_update_name>
+        <sys_updated_by>dapichar@ksbe.edu</sys_updated_by>
+        <sys_updated_on>2019-05-16 00:47:07</sys_updated_on>
+        <template><![CDATA[<div>
+  <div>
+
+    <div>
+      <div class="question">
+        If you need to request additional items such as phone or software for<br /> <span style="font-weight: 600;">{{$root.newHire}}</span>, please use the following links:
+        <ul>
+          <li ng-show="reimage"><a target='_blank' href='sp?id=sc_cat_item&sys_id=f37f192d197dd400531d9fea3439749e'>Re-Image existing computer</a></li>
+          <li><a target='_blank' href='sp?id=sc_category&sys_id=65eedb9a13c6af80c28350782244b040'>Phone, VPN, Software, etc.</a></li>
+          <li><a target='_blank' href='sp?id=sc_category&sys_id=4e2424a20f493600345f355be1050e27'>Application Access (MRI, Ebuilder, etc.)</a></li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+]]></template>
+    </sp_widget>
+</record_update>

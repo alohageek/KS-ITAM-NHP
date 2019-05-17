@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function($scope,$rootScope) {
+  /* widget controller */
+  var c = this;
+	
+	//process request for computer model data
+	c.server.get({
+		selectedId: $rootScope.hardwareSelection
+	}).then(function(response) {
+		$scope.data.items = response.data.items;
+	});
+	
+	
+	//process submit button click
+	c.submit=function(id){
+		var r = confirm("Are you sure?");
+		if (r == true) {
+			$rootScope.$emit('changeLocation', '6');
+		} else {
+			return false;
+		}
+		
+	}
+		
+}	]]></client_script>
+        <controller_as>c</controller_as>
+        <css/>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>ks_nhp_05_submit_hardware_selection</id>
+        <internal>false</internal>
+        <link/>
+        <name>KS NHP 05 Submit Hardware Selection</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+	
+	//Initialize vars
+	data.items = [];
+	
+	if (input){
+
+		var gr = new GlideRecord('cmdb_hardware_product_model');
+		gr.addQuery('sys_id',input.selectedId);
+		gr.addQuery('u_available_for_new_hires',true);
+		gr.query();
+
+		while(gr.next()){
+		 data.items.push({sys_id: ""+gr.sys_id, title: ""+gr.name, description: ""+gr.short_description, image: ""+gr.u_bundle_image.getDisplayValue()});
+		}	
+		
+	}
+
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>dapichar@ksbe.edu</sys_created_by>
+        <sys_created_on>2019-01-09 20:23:20</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_id>233a51570f3aa7401ceb590be1050e00</sys_id>
+        <sys_mod_count>23</sys_mod_count>
+        <sys_name>KS NHP 05 Submit Hardware Selection</sys_name>
+        <sys_package display_value="KS New Hire Provisioning" source="x_kasc_ks_new_hire">ccac0fcd13bb5b00c28350782244b0e8</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="KS New Hire Provisioning">ccac0fcd13bb5b00c28350782244b0e8</sys_scope>
+        <sys_update_name>sp_widget_233a51570f3aa7401ceb590be1050e00</sys_update_name>
+        <sys_updated_by>dapichar@ksbe.edu</sys_updated_by>
+        <sys_updated_on>2019-01-09 22:27:16</sys_updated_on>
+        <template><![CDATA[<div>
+  <div>
+
+    <div>
+      <div class="question">
+        Please confirm your selection before submitting this request!
+      </div>
+      <div ng-if="data.items.length == 0">
+        No Items found!
+      </div>
+      <div id="{{::item.sys_id}}" ng-repeat="item in data.items"  style="border:1px solid #999999; margin-top:20px; padding-left:15px;" class="panel">
+        <h3 id="{{::item.sys_id}}title">
+          {{::item.title}}
+        </h3>
+        <div style="max-height: 3em; overflow: hidden; padding-top:1px;">{{::item.description}}</div>
+        <div class="kb-about" style="padding-top:4px;">
+          <span class="about-outer-span">
+            <span>
+              <img src="{{::item.image}}" />
+            </span>
+            <span style="margin-left:20px;display: inline-block; width: 50%; text-align: center;">
+              <input id="{{::item.sys_id}}button" style="font-size:16px;font-style:bold;padding-left:25px;padding-right:25px;" type="button" ng-click="c.submit(item.sys_id)" value="Submit">
+            </span>
+          </span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>]]></template>
+    </sp_widget>
+</record_update>

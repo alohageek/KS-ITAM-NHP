@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="db_image">
+    <db_image action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <category>Service Portal</category>
+        <format>png</format>
+        <height>29</height>
+        <image/>
+        <name>cart.png</name>
+        <size_bytes>885</size_bytes>
+        <sys_class_name>db_image</sys_class_name>
+        <sys_created_by>dapichar@ksbe.edu</sys_created_by>
+        <sys_created_on>2018-11-01 20:14:15</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_id>43224a0d13612f40c28350782244b04c</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>cart.png</sys_name>
+        <sys_package display_value="KS New Hire Provisioning" source="x_kasc_ks_new_hire">ccac0fcd13bb5b00c28350782244b0e8</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="KS New Hire Provisioning">ccac0fcd13bb5b00c28350782244b0e8</sys_scope>
+        <sys_update_name>db_image_43224a0d13612f40c28350782244b04c</sys_update_name>
+        <sys_updated_by>dapichar@ksbe.edu</sys_updated_by>
+        <sys_updated_on>2018-11-01 20:19:59</sys_updated_on>
+        <thumbnail/>
+        <width>30</width>
+    </db_image>
+    <sys_attachment action="INSERT_OR_UPDATE">
+        <average_image_color>#0</average_image_color>
+        <chunk_size_bytes/>
+        <compressed>true</compressed>
+        <content_type>image/png</content_type>
+        <encryption_context/>
+        <file_name>image</file_name>
+        <image_height>29</image_height>
+        <image_width>30</image_width>
+        <size_bytes>885</size_bytes>
+        <size_compressed>908</size_compressed>
+        <state/>
+        <sys_created_by>dapichar@ksbe.edu</sys_created_by>
+        <sys_created_on>2018-11-01 20:19:59</sys_created_on>
+        <sys_id>a9c3464d13612f40c28350782244b0a7</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_updated_by>dapichar@ksbe.edu</sys_updated_by>
+        <sys_updated_on>2018-11-01 20:19:59</sys_updated_on>
+        <table_name>ZZ_YYdb_image</table_name>
+        <table_sys_id>43224a0d13612f40c28350782244b04c</table_sys_id>
+    </sys_attachment>
+    <sys_attachment_doc action="INSERT_OR_UPDATE">
+        <data>H4sIAAAAAAAAAA==</data>
+        <length>16</length>
+        <position>0</position>
+        <sys_attachment display_value="image" sys_id="a9c3464d13612f40c28350782244b0a7">a9c3464d13612f40c28350782244b0a7</sys_attachment>
+        <sys_created_by>dapichar@ksbe.edu</sys_created_by>
+        <sys_created_on>2018-11-01 20:19:59</sys_created_on>
+        <sys_id>e9c3464d13612f40c28350782244b0a7</sys_id>
+    </sys_attachment_doc>
+    <sys_attachment_doc action="INSERT_OR_UPDATE">
+        <data>AXUDivyJUE5HDQoaCgAAAA1JSERSAAAAHgAAAB0IBgAAAL2k3AwAAAAEZ0FNQQAAsY8L/GEFAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAAGYktHRAAAAAAAAPlDu38AAAAJcEhZcwAAW24AAFtuAWLeQrsAAALZSURBVEjHvdZJiN1FEAbw38y8JGY00Wh0yLjihhIMohLcouIeL26oKF4MHgwK4iXm6FlFCAgquEDEoxc9KnpwOQgDomhidGLUkJjEOEEHB5fkeajvkT9h3pv3lJmCpqp6qa+ruruqh8w/rcUaXIrLcSWm5hv0OrSPafvx1nwDfxywJ+L5yfMNCCsC+tVCgDVpc4DvX2jgXwM8PNtg6z8abWEEi7Eo+mIsDV+jQv0mjsxmYAhP4RaMYzoLx2NsCmdiCQ6l76Ss/TP9vWg1vu4G3MYMtuPc7HAi/Vfgg2xgLf7A+wG8KR79jjsT2rdxCt7AJM7vtas2nox8Dx5qjD3dkO/D3Q19c0PegLsiPxKbj/cCHcYBrIt+KsYiHx+9E9rT0+A0rMz5dvTRyFvCt/YCbuFTlWGeV2mtFYAluEpdmJmE/QjOwQnRn8M/mbdTpcRleCdH0BP4ULx7Sb25ZXgtxkfxeuZsCMjWRGIRXsFfCe1njXA/aw5q4ad4NYmPcEZk2KEuGnyOvzM2ieuxLWPvxtv12eQn/QBPqNu9qRGq8xLqG6PP4OqEenWisS5zDmf+7ertPjMXaAd4V+T9+DZGfkz4p7Ev/LcA78GJ6fs5UTgLq2Ln5X6A5bza6v1dqN5khzY25Ntwa0Pf1JCviY0P+wVtqecEv4RPq/M8GO/H8X1CewC7s26Vowno4azd0g9okx5TZ70rIW0P0PaEbxsEcKhL/6hKHCtU8V4ZPhZPx7AcF+BsVTB2qzS6Y1Cv/w91am8bDy4kMNzRAH9gocGXq0vaVkmpK/XzERjqk1MX8zv1NDuJpyvdq7LPQfyAvQa71c02Ff7qXN60VHH/Bhc7+v38Mjuezbgu/cepj8R2PNpvGJeqSrMPl6msNDHX4mNoo/pCjeA9vNhrcucHeAkuwhfqnd48ICjcoCrTiCooPWkkfK9KCteqc35Bpc5B6HDWD6vavrPX5H8BFa3CW7k8iLMAAAAASUVORK5CYILw7BbEdQMAAA==</data>
+        <length>1200</length>
+        <position>1</position>
+        <sys_attachment display_value="image" sys_id="a9c3464d13612f40c28350782244b0a7">a9c3464d13612f40c28350782244b0a7</sys_attachment>
+        <sys_created_by>dapichar@ksbe.edu</sys_created_by>
+        <sys_created_on>2018-11-01 20:19:59</sys_created_on>
+        <sys_id>6dc3464d13612f40c28350782244b0a7</sys_id>
+    </sys_attachment_doc>
+</record_update>

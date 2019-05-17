@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function($rootScope, $scope) {
+  /* widget controller */
+  var c = this;
+	
+	if($rootScope.allowAppleSelection){
+		$rootScope.userFormInteraction = true;
+	}
+	
+	c.processClick = function() {   
+			$rootScope.userFormInteraction = true;
+   }; 
+	
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css/>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>ks-nhp-03-job-type</id>
+        <internal>false</internal>
+        <link/>
+        <name>KS NHP 03 Choose Mac or Dell</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {  /* populate the 'data' object */  /* e.g., data.table = $sp.getValue('table'); */})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>dapichar@ksbe.edu</sys_created_by>
+        <sys_created_on>2018-09-24 21:14:30</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_id>add36ab40f78e7001ceb590be1050e7a</sys_id>
+        <sys_mod_count>73</sys_mod_count>
+        <sys_name>KS NHP 03 Choose Mac or Dell</sys_name>
+        <sys_package display_value="KS New Hire Provisioning" source="x_kasc_ks_new_hire">ccac0fcd13bb5b00c28350782244b0e8</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="KS New Hire Provisioning">ccac0fcd13bb5b00c28350782244b0e8</sys_scope>
+        <sys_update_name>sp_widget_add36ab40f78e7001ceb590be1050e7a</sys_update_name>
+        <sys_updated_by>dapichar@ksbe.edu</sys_updated_by>
+        <sys_updated_on>2019-01-09 19:29:51</sys_updated_on>
+        <template><![CDATA[<div class="questionHeader">
+  Please tell us about your new hire!
+</div>
+<div class="question">
+What kind of computer would you like to select for <span style="font-weight: 600;">{{$root.newHire}} </span>?
+</div>
+
+<div>
+  <input ng-click="c.processClick()" type="radio" ng-model="$root.allowAppleSelection" value="yes"> Mac<br>
+  <input ng-click="c.processClick()" type="radio" ng-model="$root.allowAppleSelection" value="no"> Windows<br>
+</div>]]></template>
+    </sp_widget>
+</record_update>

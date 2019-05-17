@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function ($rootScope) {
+  /* widget controller */
+  var c = this;	
+	$rootScope.newHire = c.data.newHire;
+	$rootScope.newHireSysId = c.data.newHireSysId;
+	$rootScope.managerSysId = c.data.managerSysId;
+	$rootScope.startDate = c.data.startDate;
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.dropdown{
+  width:290px;  
+}
+
+.userFields{
+ margin-top:20px;
+}
+
+.fieldTitle{
+ font-weight:600; 
+ width:150px;
+ float:left;
+ text-align:right;
+ padding-right:5px;
+}
+
+.validationError{
+  font-weight:600;
+  color:red;
+  
+}
+
+.cart{
+  border:1px solid #999999;
+  padding:15px;  
+  margin-top:15px;  
+  border-radius: 10px;
+  width:80%;
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>ks_nhp_user_fields</id>
+        <internal>false</internal>
+        <link/>
+        <name>KS NHP User Fields</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+
+	//Get new hire data
+  var user_sysId = $sp.getParameter("sysparm_user");
+	var gr = new GlideRecord('sys_user');
+	gr.get(user_sysId);
+	data.newHire = gr.name.toString() != '' ? gr.name.toString() : 'Could not find user!';
+	data.newHireSysId = user_sysId;
+	
+	//New Hire Start Date
+	var startDate = $sp.getParameter("sysparm_start_date");
+	data.startDate = startDate;
+	
+	//Get Manager data
+	var manSysId = $sp.getParameter("sysparm_manager");
+	var mgr = new GlideRecord('sys_user');
+	mgr.get(manSysId);
+	data.manager = mgr.name.toString() != '' ? mgr.name.toString() : 'Could not find user!';	
+	data.managerSysId = manSysId;
+	
+	//Conjure staff types into multi dim array
+	data.selectedStaffType = $sp.getParameter("sysparm_staff_type");
+	var types = new GlideRecord('sys_choice');
+	types.addQuery('element','u_employee_type');
+	types.orderBy('label');
+	types.query();	
+	data.staffTypes = [];
+	while(types.next()){
+		data.staffTypes.push({value: types.value.toString(), label: types.label.toString()});
+	}
+	
+	/*
+	//Conjure departments
+	data.selectedDepartment = $sp.getParameter("sysparm_department");
+	data.departments = [];
+	var dpt = new GlideRecord('cmn_department');
+	dpt.orderBy('name');
+	dpt.query();
+	while(dpt.next()){
+		data.departments.push({value:dpt.sys_id.toString(), label: dpt.name.toString()});
+	}
+	
+	//Conjure locations
+	data.selectedLocation = $sp.getParameter("sysparm_location");
+	data.locations = [];
+	var loc = new GlideRecord('cmn_location');
+	loc.orderBy('name');
+	loc.query();
+	while(loc.next()){
+		data.locations.push({value:loc.sys_id.toString(), label: loc.name.toString()});
+	}
+	*/
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>dapichar@ksbe.edu</sys_created_by>
+        <sys_created_on>2018-08-08 00:09:24</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_id>6b8fb7d10f7b5b001ceb590be1050e91</sys_id>
+        <sys_mod_count>247</sys_mod_count>
+        <sys_name>KS NHP User Fields</sys_name>
+        <sys_package display_value="KS New Hire Provisioning" source="x_kasc_ks_new_hire">ccac0fcd13bb5b00c28350782244b0e8</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="KS New Hire Provisioning">ccac0fcd13bb5b00c28350782244b0e8</sys_scope>
+        <sys_update_name>sp_widget_6b8fb7d10f7b5b001ceb590be1050e91</sys_update_name>
+        <sys_updated_by>dapichar@ksbe.edu</sys_updated_by>
+        <sys_updated_on>2019-05-15 23:35:31</sys_updated_on>
+        <template><![CDATA[<form name="dakine">
+<div class='userFields'>
+  <div class='fieldTitle'>Employee:</div>
+  <input class="hire_input read_only" type="text" name="new_hire" size="40" readonly value="{{c.data.newHire}}"/>
+  <input type="hidden" name="new_hire_sysId" size="50" value="{{c.data.newHireSysId}}"/>
+  <br /><br />
+  
+  <div class='fieldTitle'>Approving Manager:</div>
+  <input class="hire_input read_only" type="text" name="manager" size="40" readonly value="{{c.data.manager}}"/>
+  <input type="hidden" name="managerSysId" size="50" value="{{c.data.managerSysId}}"/>
+  <br /><br />
+    
+  <div class='fieldTitle'>Staff Type:</div>
+  <select name="staff" ng-model="c.data.selectedStaffType" disabled="true" style="background-color:#e6e8ea" class="hire_input dropdown">
+     <option ng-repeat="type in c.data.staffTypes" value="{{::type.value}}">{{::type.label}}</option>  
+  </select>
+  <br /><br />
+  
+  <!--
+  <div class='fieldTitle'>Department:</div>
+  <select name="department" 
+          class="hire_input dropdown" 
+          ng-model="c.data.selectedDepartment" 
+          ng-options="dpt.value as dpt.label for dpt in c.data.departments"          
+          required>
+   <option value="">Select Department</option> 
+  </select>  
+  <br /><br />
+  
+
+  <div class="fieldTitle" ng-show="!dakine.location.$error.required">Location:</div>
+  <div class="fieldTitle validationError" ng-show="dakine.location.$error.required">* Location:</div>
+  <select name="location"
+          class="hire_input dropdown"
+          ng-model="c.data.selectedLocation"  
+          ng-options="loc.value as loc.label for loc in c.data.locations" 
+          required>
+    <option value="">Select Location</option> 
+  </select> 
+-->
+</div>   
+</form>
+
+<div ng-show="showCart" class="cart" id="nhpCart">
+  <span style="text-decoration:underline;">Your Items:</span>
+  <img src="cart.png" align="right" width="30" height="29"/>
+</div>]]></template>
+    </sp_widget>
+</record_update>
