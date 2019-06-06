@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_scope_privilege">
+    <sys_scope_privilege action="INSERT_OR_UPDATE">
+        <operation>execute</operation>
+        <source_scope display_value="KS New Hire Provisioning">ccac0fcd13bb5b00c28350782244b0e8</source_scope>
+        <status>allowed</status>
+        <sys_class_name>sys_scope_privilege</sys_class_name>
+        <sys_created_by>dapichar@ksbe.edu</sys_created_by>
+        <sys_created_on>2019-05-22 00:55:47</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_id>9d7a0a7d13657b40113c5d622244b085</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>CartJS.getCartDetails</sys_name>
+        <sys_package display_value="KS New Hire Provisioning" source="x_kasc_ks_new_hire">ccac0fcd13bb5b00c28350782244b0e8</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="KS New Hire Provisioning">ccac0fcd13bb5b00c28350782244b0e8</sys_scope>
+        <sys_update_name>sys_scope_privilege_9d7a0a7d13657b40113c5d622244b085</sys_update_name>
+        <sys_updated_by>dapichar@ksbe.edu</sys_updated_by>
+        <sys_updated_on>2019-05-22 00:55:47</sys_updated_on>
+        <target_name>CartJS.getCartDetails</target_name>
+        <target_scope display_value="Global">global</target_scope>
+        <target_type>scriptable</target_type>
+    </sys_scope_privilege>
+</record_update>

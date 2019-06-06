@@ -88,7 +88,7 @@
 		gr.query();
 
 		while(gr.next()){
-		 data.items.push({sys_id: ""+gr.sys_id, title: ""+gr.name, description: ""+gr.short_description, image: ""+gr.u_bundle_image.getDisplayValue()});
+			data.items.push({sys_id: ""+gr.sys_id, title: ""+gr.name, description: ""+gr.short_description, image: ""+gr.picture.getDisplayValue()});//u_bundle_image
 		}	
 		
 	}
@@ -104,7 +104,7 @@
         <sys_created_on>2018-10-04 20:02:24</sys_created_on>
         <sys_customer_update>false</sys_customer_update>
         <sys_id>8f33b1480f8daf001ceb590be1050ee3</sys_id>
-        <sys_mod_count>214</sys_mod_count>
+        <sys_mod_count>220</sys_mod_count>
         <sys_name>KS NHP 04 Choose Hardware</sys_name>
         <sys_package display_value="KS New Hire Provisioning" source="x_kasc_ks_new_hire">ccac0fcd13bb5b00c28350782244b0e8</sys_package>
         <sys_policy/>
@@ -112,7 +112,7 @@
         <sys_scope display_value="KS New Hire Provisioning">ccac0fcd13bb5b00c28350782244b0e8</sys_scope>
         <sys_update_name>sp_widget_8f33b1480f8daf001ceb590be1050ee3</sys_update_name>
         <sys_updated_by>dapichar@ksbe.edu</sys_updated_by>
-        <sys_updated_on>2019-01-09 20:33:04</sys_updated_on>
+        <sys_updated_on>2019-05-18 01:08:28</sys_updated_on>
         <template><![CDATA[<div>
   <div>
 

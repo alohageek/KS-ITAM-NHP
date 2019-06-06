@@ -56,6 +56,7 @@
 	if(input && input.hardwareSubmitted == true){ 
 		
 		//Set Vars
+		//-----------------------------------
 		var gdt = new GlideDateTime();
 		gdt.addDaysLocalTime(2);
 		var dueDate = getFormattedDate(gdt, 1);
@@ -63,54 +64,72 @@
     var managerSysId = input.managerSysId;		
 		var startDate = input.startDate;
 		var hardwareBundleId = input.selectedId;
+		var bundleCatItem;		
 		
-		//Shopping cart request
+		//Get the sys_id of the bundles cat item
 		//-----------------------------------
-   /* var cartId = gs.generateGUID();
-    var cart = new Cart(cartId);
-    var item = cart.addItem(hardwareBundleId);//Hardware Request
-    //cart.setVariable(item,'name',empSys_id);//
-    var rc = cart.placeOrder();	
-		*/
+		var gr = new GlideRecord('cmdb_model');
+		gr.get(hardwareBundleId.toString());
+		bundleCatItem = gr.product_catalog_item;
+		
+		//Get new hire's info
+		//-----------------------------------
+		var hire = new GlideRecord('sys_user');
+		hire.get(newHireSysId);
+		
 
-		//var cart = new sn_sc.CartJS();
-      //cart.empty();
-		/*
+		//Initialize shopping cart request
+		//-----------------------------------		
 		var cart = new sn_sc.CartJS();
-		var item =
+		
+		var request =
 		{
-		'sysparm_id': "'"+hardwareBundleId+"'",
+		'sysparm_id': bundleCatItem.toString(),
 		'sysparm_quantity': '1',
-		'variables':{
-		'color': 'slate',
-		'storage': 'sixtyfour' 
-		}};
-		var cartDetails = cart.addToCart(item);
-		*/
-		//gs.addInfoMessage(cartDetails);
+			'variables':{				
+				'new_hire': newHireSysId,
+				'start_date':startDate.toString(),
+				'staff_type': hire.u_employee_type.toString(),
+				'cost_center_code':hire.cost_center.code.toString(),
+				'location':hire.location.name.toString(),				
+				'manager': managerSysId,
+				'manager_email': hire.manager.email.toString(),
+				'manager_phone': hire.manager.phone.toString()	
+			}
+		}
+		cart.addToCart(request);
+		
+
+		//Finalize and submit request
+		//-----------------------------------	
+		var request2 =
+		{
+			'special_instructions' : 'New hire start date: '+startDate.toString()
+		};
+		cart.setRequestedFor(newHireSysId);
+		var requestDetails = cart.submitOrder(request2);
+		gs.addInfoMessage("Request submitted: <a href = 'sp?id=sc_request&table=sc_request&sys_id="+requestDetails.request_id+"'>" + requestDetails.request_number+"</a>");		
 		
 		
-		//Update termination request
+		//Update request 
 		//-----------------------------------
-		/*
-    var gr = new GlideRecord('sc_request');
-    gr.get(rc.sys_id);
-    gr.urgency = 1;
-    gr.stage = 'fulfillment';
-    gr.requested_for = newHireSysId;
-    gr.u_requested_by = managerSysId;
-    gr.opened_by = managerSysId;
-    gr.u_approving_manager = managerSysId;
-    gr.u_date_needed = ;
-    gr.due_date = dueDate;
-    gr.short_description = 'Programatic creation of a termination';
-    gr.special_instructions = 'Auto generated termination request from Human Resources Workday Application';
-    gr.update();
-		*/
+    var req = new GlideRecord('sc_request');
+    req.get(requestDetails.request_id);
+    req.urgency = 1;
+    req.stage = 'requested';
+    req.requested_for = newHireSysId;
+    req.u_requested_by = managerSysId;
+    req.u_approving_manager = managerSysId;
+    req.u_date_needed = startDate;
+    req.due_date = startDate;
+    req.short_description = 'New hire asset request';
+		req.assignment_group = '635f4f014cf74200d28e90005a9ffeca';
+    req.update();
 		
 		
 		
-		gs.addInfoMessage("Hardware request submitted! - " + newHireSysId + " - " + managerSysId+ " - " +startDate + " - " + hardwareBundleId + " - " + gdt);		
+		
+		//gs.addInfoMessage("Hardware request submitted! - " + newHireSysId + " - " + managerSysId+ " - " +startDate + " - " + hardwareBundleId + " - " + gdt);		
 		
 	}
 	//---------------------------------
@@ -152,7 +171,7 @@ function getFormattedDate(date, version) {
         <sys_created_on>2018-10-25 19:30:47</sys_created_on>
         <sys_customer_update>false</sys_customer_update>
         <sys_id>2465b5f60fdd6f401ceb590be1050e18</sys_id>
-        <sys_mod_count>70</sys_mod_count>
+        <sys_mod_count>212</sys_mod_count>
         <sys_name>KS NHP 08 SP Jump Off</sys_name>
         <sys_package display_value="KS New Hire Provisioning" source="x_kasc_ks_new_hire">ccac0fcd13bb5b00c28350782244b0e8</sys_package>
         <sys_policy/>
@@ -160,7 +179,7 @@ function getFormattedDate(date, version) {
         <sys_scope display_value="KS New Hire Provisioning">ccac0fcd13bb5b00c28350782244b0e8</sys_scope>
         <sys_update_name>sp_widget_2465b5f60fdd6f401ceb590be1050e18</sys_update_name>
         <sys_updated_by>dapichar@ksbe.edu</sys_updated_by>
-        <sys_updated_on>2019-05-16 00:47:07</sys_updated_on>
+        <sys_updated_on>2019-05-31 21:12:18</sys_updated_on>
         <template><![CDATA[<div>
   <div>
 
