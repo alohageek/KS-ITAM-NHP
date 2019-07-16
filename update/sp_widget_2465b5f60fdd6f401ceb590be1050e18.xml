@@ -20,6 +20,7 @@
 			newHire: $rootScope.newHire,
 			startDate: $rootScope.startDate
 		});
+		document.getElementById("managerMessage").style.visibility = "visible";
 	}
 	
 }	//question]]></client_script>
@@ -171,7 +172,7 @@ function getFormattedDate(date, version) {
         <sys_created_on>2018-10-25 19:30:47</sys_created_on>
         <sys_customer_update>false</sys_customer_update>
         <sys_id>2465b5f60fdd6f401ceb590be1050e18</sys_id>
-        <sys_mod_count>212</sys_mod_count>
+        <sys_mod_count>218</sys_mod_count>
         <sys_name>KS NHP 08 SP Jump Off</sys_name>
         <sys_package display_value="KS New Hire Provisioning" source="x_kasc_ks_new_hire">ccac0fcd13bb5b00c28350782244b0e8</sys_package>
         <sys_policy/>
@@ -179,7 +180,7 @@ function getFormattedDate(date, version) {
         <sys_scope display_value="KS New Hire Provisioning">ccac0fcd13bb5b00c28350782244b0e8</sys_scope>
         <sys_update_name>sp_widget_2465b5f60fdd6f401ceb590be1050e18</sys_update_name>
         <sys_updated_by>dapichar@ksbe.edu</sys_updated_by>
-        <sys_updated_on>2019-05-31 21:12:18</sys_updated_on>
+        <sys_updated_on>2019-07-16 01:15:54</sys_updated_on>
         <template><![CDATA[<div>
   <div>
 
@@ -197,7 +198,7 @@ function getFormattedDate(date, version) {
   </div>
 
 </div>
-
+<span style="font-weight:600;font-size:14px;visibility:hidden" id="managerMessage"><b>NOTE:</b> A confirmation email has been sent to the hiring manager, requested items will be confirmed once approval is received.</span>
 ]]></template>
     </sp_widget>
 </record_update>
