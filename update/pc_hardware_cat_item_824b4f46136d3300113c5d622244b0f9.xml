@@ -94,6 +94,8 @@
         <u_application_task_3_ksm/>
         <u_is_application>false</u_is_application>
         <u_manager_approval>false</u_manager_approval>
+        <u_pre_approval_group/>
+        <u_requires_pre_approval>false</u_requires_pre_approval>
         <u_review_group/>
         <u_service_provider_group_gener/>
         <u_service_provider_group_kp/>
