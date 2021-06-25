@@ -31,17 +31,18 @@
         <content_type>image/png</content_type>
         <encryption_context/>
         <file_name>image</file_name>
+        <hash/>
         <image_height>29</image_height>
         <image_width>30</image_width>
         <size_bytes>885</size_bytes>
         <size_compressed>908</size_compressed>
-        <state/>
+        <state>available</state>
         <sys_created_by>dapichar@ksbe.edu</sys_created_by>
         <sys_created_on>2018-11-01 20:19:59</sys_created_on>
         <sys_id>a9c3464d13612f40c28350782244b0a7</sys_id>
-        <sys_mod_count>2</sys_mod_count>
-        <sys_updated_by>dapichar@ksbe.edu</sys_updated_by>
-        <sys_updated_on>2018-11-01 20:19:59</sys_updated_on>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_updated_by>guest</sys_updated_by>
+        <sys_updated_on>2020-07-10 20:23:00</sys_updated_on>
         <table_name>ZZ_YYdb_image</table_name>
         <table_sys_id>43224a0d13612f40c28350782244b04c</table_sys_id>
     </sys_attachment>
