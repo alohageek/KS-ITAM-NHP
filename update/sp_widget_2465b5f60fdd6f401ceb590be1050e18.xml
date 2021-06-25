@@ -118,8 +118,8 @@
     req.get(requestDetails.request_id);
     req.urgency = 1;
     req.stage = 'requested';
-    req.requested_for = managerSysId;
-    req.u_requested_by = managerSysId;
+    //req.requested_for = managerSysId;
+    //req.u_requested_by = managerSysId;
     req.u_approving_manager = managerSysId;
     req.u_date_needed = startDate;
     req.due_date = startDate;
@@ -172,7 +172,7 @@ function getFormattedDate(date, version) {
         <sys_created_on>2018-10-25 19:30:47</sys_created_on>
         <sys_customer_update>false</sys_customer_update>
         <sys_id>2465b5f60fdd6f401ceb590be1050e18</sys_id>
-        <sys_mod_count>220</sys_mod_count>
+        <sys_mod_count>222</sys_mod_count>
         <sys_name>KS NHP 08 SP Jump Off</sys_name>
         <sys_package display_value="KS New Hire Provisioning" source="x_kasc_ks_new_hire">ccac0fcd13bb5b00c28350782244b0e8</sys_package>
         <sys_policy/>
@@ -180,7 +180,7 @@ function getFormattedDate(date, version) {
         <sys_scope display_value="KS New Hire Provisioning">ccac0fcd13bb5b00c28350782244b0e8</sys_scope>
         <sys_update_name>sp_widget_2465b5f60fdd6f401ceb590be1050e18</sys_update_name>
         <sys_updated_by>dapichar@ksbe.edu</sys_updated_by>
-        <sys_updated_on>2021-06-25 21:14:24</sys_updated_on>
+        <sys_updated_on>2021-06-25 21:32:37</sys_updated_on>
         <template><![CDATA[<div>
   <div>
 
